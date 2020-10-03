@@ -8,7 +8,8 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          Going to be the MEARN stack tutorial <p />
+          Mongo Express React Node
         </p>
         <a
           className="App-link"

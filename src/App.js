@@ -1,5 +1,5 @@
 import React from 'react';
-import "bootstrap/dist/css/bootstrap.min.css";
+//import "bootstrap/dist/css/bootstrap.min.css";
 //import './App.css';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 
@@ -8,16 +8,19 @@ import EditTodo from "./components/edit-todo.component";
 import CreateTodo from "./components/create-todo.componet";
 
 import logo from './logo.svg';
+import Navbar from "react-bootstrap/Navbar";
 
 function App() {
   return (
     <Router>
       <Router>
         <div className="container">
-          <nav className="navbar navbar-expand-lg navbar-light bg-light">
+          <div className="navbar navbar-expand-lg navbar-light bg-light">
+          
             <a
-              className="navbar-brand"
+              class="navbar-brand"
               href="https://codingthesmartway.com"
+              
             >
               <img
                 src={logo}
@@ -43,7 +46,7 @@ function App() {
                 </li>
               </ul>
             </div>
-          </nav>
+          </div>
           <br />
           <Route path="/" exact component={TodosList} />
           <Route path="/edit/:id" component={EditTodo} />

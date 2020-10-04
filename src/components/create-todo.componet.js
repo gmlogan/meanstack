@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 
 function CreateTodo() {
   const { register, handleSubmit } = useForm();
+  
   const onSubmitForm = (formData) => {
      
     console.log(formData.description);
@@ -14,6 +15,7 @@ function CreateTodo() {
   return (
     <div style={{ marginTop: 10 }}>
       <h3>Create New Todo</h3>
+
       <form onSubmit={handleSubmit(onSubmitForm)}>
         <div className="form-group">
           <label>Description: </label>

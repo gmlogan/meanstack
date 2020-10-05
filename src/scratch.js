@@ -1,38 +1,50 @@
-<div className="container">
-          <div className="navbar navbar-expand-lg navbar-light bg-light">
-          
-            <a
-              class="navbar-brand"
-              href="https://codingthesmartway.com"
-              
-            >
-              <img
-                src={logo}
-                width="30"
-                height="30"
-                alt="CodingTheSmartWay.com"
-              />
-            </a>
-            <Link to="/" className="navbar-brand">
-              MERN-Stack Todo App
-            </Link>
-            <div className="collpase navbar-collapse">
-              <ul className="navbar-nav mr-auto">
-                <li className="navbar-item">
-                  <Link to="/" className="nav-link">
-                    Todos
-                  </Link>
-                </li>
-                <li className="navbar-item">
-                  <Link to="/create" className="nav-link">
-                    Create Todo
-                  </Link>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <br />
-          <Route path="/" exact component={TodosList} />
-          <Route path="/edit/:id" component={EditTodo} />
-          <Route path="/create" component={CreateTodo} />
-        </div>
+import React, { useEffect, useState } from "react";
+
+export const CountryList = () => {
+  const [countries, setCountries] = useState([]);
+  const [load, setLoad] = useState(false);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("https://restcountries.eu/rest/v2/all")
+      .then((res) => {
+        setCountries(res.data);
+        setLoad(true);
+      })
+      .catch((err) => {
+        setError(err.message);
+        setLoad(true);
+      });
+  }, []);
+
+  if (load) {
+    return (
+      <ul>
+        {error ? (
+          <li>{error.message}</li>
+        ) : (
+          countries.map((country, index) => <li key={index}>{country.name}</li>)
+        )}
+      </ul>
+    );
+  } else {
+    return <div>Loading...</div>;
+  }
+};
+
+
+
+
+ {
+   error ? (
+     <li>{error.message}</li>
+   ) : (
+     todos.map((todo, index) => (
+       <li key={todo.__id}>
+         {todo.todo_description},{todo.todo_responsible},{todo.todo_priority},
+         {todo.todo_completed}
+       </li>
+     ))
+   );
+ }

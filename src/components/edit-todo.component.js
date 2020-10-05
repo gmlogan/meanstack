@@ -1,43 +1,34 @@
-import React from 'react';
-import {useForm} from "react-hook-form";
-import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
+function EditTodo(props) {
+    const [todos, setTodos] = useState([]);
+    const [load, setLoad] = useState(false);
+    const [error, setError] = useState("");
 
-function EditTodo() {
-
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit= (formData) => {
-    console.log(formData.firstname);
-    console.log(formData.lastname);
-  };
+    useEffect(() => {
+      axios
+        .get("http://localhost:4000/todos/"+props.match.params.id)
+        .then((res) => {
+          setTodos(res.data);
+          setLoad(true);
+        })
+        .catch((err) => {
+          setError(err.message);
+          setLoad(true);
+        });
+    }, []);
   
+
   return (
-    <div>
-        <p>Welcome to EditTodo Component Form</p>
-          <Form onSubmit={handleSubmit(onSubmit)}>
-            <Form.Group>
-              <Form.Label>First Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="firstname"
-                ref={register}>
-              </Form.Control>
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Last Name</Form.Label>
-              <Form.Control
-                type="text"
-                name="lastname"
-                ref={register}>
-              </Form.Control>
-            </Form.Group>
-            <Button type="submit">Submit form</Button>
-          </Form>
-      </div>
-    );
-    
+    <ul>
+      <h2>Edit Component</h2>
+      Called with: {props.match.params.id}
+      <ul>{todos.todo_description}</ul>
+      <ul>{todos.todo_responsible}</ul>
+      <ul>{todos.todo_priority}</ul>
+    </ul>
+  );
 }
 
 export default EditTodo;

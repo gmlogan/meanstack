@@ -1,5 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
+import axios from "axios";
 
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
@@ -10,6 +11,15 @@ function CreateTodo() {
     console.log(formData.description);
     console.log(formData.responsible);
     console.log(formData.priorityOption);
+    const newTodo = {
+      todo_description: formData.description,
+      todo_responsible: formData.responsible,
+      todo_priority: formData.priorityOption,
+      todo_completed: false
+    };
+     axios
+       .post("http://localhost:4000/todos/add", newTodo)
+       .then((res) => console.log(res.data));
   };
 
   return (

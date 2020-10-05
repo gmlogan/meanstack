@@ -21,7 +21,7 @@ function App() {
         <Nav className="mr-auto">
           <Nav.Link href="/">Home</Nav.Link>
           <Nav.Link href="/create">Create</Nav.Link>
-          <Nav.Link href="/edit/1">Edit</Nav.Link>
+        
         </Nav>
       </Navbar>
       <Route path="/" exact component={TodosList} />

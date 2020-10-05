@@ -48,3 +48,21 @@ export const CountryList = () => {
      ))
    );
  }
+
+
+ <div>
+   <table>
+     <thead>
+       <tr>
+         <th>Description</th>
+         <th>Responsible</th>
+         <th>Priority</th>
+       </tr>
+     </thead>
+     <tbody>
+       {todos.map((todo, index) => (
+         <Todorow todo={todo} />
+       ))}
+     </tbody>
+   </table>
+ </div>;

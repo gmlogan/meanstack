@@ -1,5 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router, Route} from "react-router-dom";
 
 import TodosList from "./components/todos-list.component";
 import EditTodo from "./components/edit-todo.component";

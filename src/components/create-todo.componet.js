@@ -1,10 +1,9 @@
 import React from "react";
-import { useForm } from "react-hook-form";
 import axios from "axios";
-
+import { useForm } from "react-hook-form";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
-function CreateTodo() {
+function CreateTodo(props) {
   const { register, handleSubmit } = useForm();
   
   const onSubmit = (formData) => {
@@ -20,13 +19,14 @@ function CreateTodo() {
      axios
        .post("http://localhost:4000/todos/add", newTodo)
        .then((res) => console.log(res.data));
+        props.history.push("/");
   };
 
   return (
     <div style={{ marginTop: 10 }}>
       <h3>Create New Todo</h3>
 
-      <Form onSubmit={handleSubmit(onSubmit)}>
+      < Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group>
           <Form.Label>Description</Form.Label>
           <Form.Control
@@ -35,6 +35,7 @@ function CreateTodo() {
             ref={register}
           ></Form.Control>
         </Form.Group>
+        
         <Form.Group>
           <Form.Label>Responsible</Form.Label>
           <Form.Control
@@ -48,21 +49,21 @@ function CreateTodo() {
             type="radio"
             label="Low"
             name="priorityOption"
-            value="low"
+            value="Low"
             ref={register}
           />
           <Form.Check
             type="radio"
             label="Medium"
             name="priorityOption"
-            value="medium"
+            value="Medium"
             ref={register}
           />
           <Form.Check
             type="radio"
             label="High"
             name="priorityOption"
-            value="high"
+            value="High"
             ref={register}
           />
         </Form.Group>

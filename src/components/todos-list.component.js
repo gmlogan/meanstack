@@ -1,54 +1,51 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Todorow from './todorow.component';
-import { Link } from "react-router-dom";
+import Table from "react-bootstrap/Table";
 
 
 function TodosList() {
   const [todos, setTodos] = useState([]);
   const [load, setLoad] = useState(false);
-  const [error, setError] = useState("");
+  const [error, setError] = useState('');
 
   useEffect(() => {
-    axios.get("http://localhost:4000/todos")
-      .then(res => {
+    axios
+      .get("http://localhost:4000/todos")
+      .then((res) => {
         setTodos(res.data);
         setLoad(true);
       })
-      .catch(err => {
+      .catch((err) => {
         setError(err.message);
         setLoad(true);
       });
-  },[])
+  },[]);
   if (load) {
-    return (
+
+    
+    return error ? (
+      <h1>{error.message}</h1>
+    ) : (
       <div>
-        {error ? (
-          <h3>Error Occured</h3>
-        ) : (
-          <div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Description</th>
-                  <th>Responsible</th>
-                  <th>Priority </th>
-                </tr>
-              </thead>
-              <tbody>
-                {todos.map((todo, index) => (
-                  <Todorow todo={todo} />
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+        <Table striped bordered>
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Responsible</th>
+              <th>Priority </th>
+            </tr>
+          </thead>
+          <tbody>
+            {todos.map((todo, index) => (
+              <Todorow todo={todo} key={todo._id} />
+            ))}
+          </tbody>
+        </Table>
       </div>
     );
- } else {
-   return <div>Loading...</div>;
- }
-  
+  } else {
+    return <h1>Nothing yet</h1>;
+  }
 }
-
 export default TodosList;
